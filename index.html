@@ -130,14 +130,14 @@
             <label class="block text-sm font-medium mb-1 required">บริษัท (Company)</label>
             <select id="company" class="field" required>
               <option value="">-- กรุณาเลือกบริษัท --</option>
-              <option>ALT</option>
-              <option>EMAX</option>
-              <option>GTS</option>
-              <option>IFH</option>
-              <option>IGC</option>
-              <option>I21</option>
-              <option>INN</option>
-              <option>SIC</option>
+              <option>ALT TELECOMMUNICATION</option>
+              <option>INNOVA TELECOMMUNICATION</option>
+              <option>GROUP TECH SOLUTIONS CO., LTD.</option>
+              <option>INFORMATION HIGHWAY COMPANY LIMITED</option>
+              <option>SMART INFRANET COMPANY LIMITED (SIC)</option>
+              <option>ENERGY MAX CO., LTD.</option>
+              <option>I21.CO.TH</option>
+              <option>INTERGATEWAY.CO.TH</option>
             </select>
           </div>
           <div>
@@ -239,7 +239,7 @@
         </div>
         <div class="p-5 space-y-5">
           <div>
-            <label class="block font-medium text-sm mb-2">รูปแบบการเรียนรู้ที่ท่านชื่นชอบที่สุด</label>
+            <label class="block font-medium text-sm mb-2">รูปแบบการเรียนรู้ที่ท่านชื่นชอบที่สุด (สามารถเลือกได้มากกว่า 1 ข้อ)</label>
             <div class="grid md:grid-cols-2 gap-2" id="learningModes"></div>
           </div>
           <div>
@@ -326,7 +326,7 @@
     checkList('digitalThinking', groups.digitalThinking);
     checkList('leadership', groups.leadership);
     radios('departmentRadios', groups.departments, 'department');
-    radios('learningModes', groups.learningModes, 'learning');
+    checkList('learningModes', groups.learningModes);
     checkList('obstacles', groups.obstacles);
 
     document.querySelectorAll('input[name="department"]').forEach(r => r.addEventListener('change', () => {
@@ -361,7 +361,7 @@
           level = document.querySelector('input[name="level"]:checked')?.value,
           learning = document.querySelector('input[name="learning"]:checked')?.value;
 
-      if (!company || !dep || !level || !learning || !document.getElementById('idp1').value.trim() || !document.getElementById('idp2').value.trim()) {
+      if (!company || !dep || !level || getChecked('learningModes').length === 0 || !document.getElementById('idp1').value.trim() || !document.getElementById('idp2').value.trim()) {
         showToast('กรุณากรอกข้อมูลที่จำเป็น: บริษัท, หน่วยงาน, ระดับตำแหน่ง, รูปแบบเรียนรู้ และ IDP 1–2');
         return;
       }
@@ -385,7 +385,7 @@
           leadership: getChecked('leadership'),
           softOther: document.getElementById('softOther').value
         },
-        learning,
+        learning: getChecked('learningModes'),
         obstacles: getChecked('obstacles').map(x => x === 'Other:' ? document.getElementById('obstacleOther').value : x),
         idp: [document.getElementById('idp1').value.trim(), document.getElementById('idp2').value.trim(), document.getElementById('idp3').value.trim()].filter(Boolean)
       };
@@ -448,7 +448,7 @@
         ทักษะเทคนิค: [...r.skills.network, ...r.skills.quality, ...r.skills.newTech, r.skills.techOther].filter(Boolean).join('|'),
         ทักษะจัดการ: [...r.skills.management, ...r.skills.legalSafety, r.skills.managementOther].filter(Boolean).join('|'),
         SoftSkills: [...r.skills.softBasics, ...r.skills.digitalThinking, ...r.skills.leadership, r.skills.softOther].filter(Boolean).join('|'),
-        รูปแบบเรียนรู้: r.learning,
+        รูปแบบเรียนรู้: Array.isArray(r.learning) ? r.learning.join('|') : r.learning,
         อุปสรรค: r.obstacles.join('|'),
         IDP: r.idp.join('|')
       }));
