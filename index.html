@@ -241,6 +241,7 @@
           <div>
             <label class="block font-medium text-sm mb-2">รูปแบบการเรียนรู้ที่ท่านชื่นชอบที่สุด (สามารถเลือกได้มากกว่า 1 ข้อ)</label>
             <div class="grid md:grid-cols-2 gap-2" id="learningModes"></div>
+            <input id="learningModesOther" class="field mt-2 hidden" placeholder="รูปแบบการเรียนรู้อื่น">
           </div>
           <div>
             <label class="block font-medium text-sm mb-2">อุปสรรคสำคัญที่ทำให้ท่านไม่ได้รับการฝึกอบรมโดยท่าน</label>
@@ -304,7 +305,7 @@
       softBasics: ["ภาษาอังกฤษเพื่อการสื่อสาร/ธุรกิจ (Business English)", "ทักษะคอมพิวเตอร์พื้นฐาน: Microsoft Excel (ขั้นสูง), การใช้ Word/PowerPoint อย่างมีประสิทธิภาพ", "การสื่อสารและการประสานงานข้ามสายงานอย่างมีประสิทธิภาพ"],
       digitalThinking: ["Critical Thinking และการแก้ไขปัญหาที่ซับซ้อน", "การใช้เครื่องมือ AI (เช่น ChatGPT) เพื่อเพิ่มประสิทธิภาพงานประจำ"],
       leadership: ["การโค้ชและการสอนงาน (Coaching & Mentoring)", "การบริหารการเปลี่ยนแปลง (Change Management)", "การสร้างแรงจูงใจและการมีส่วนร่วมของทีม (Employee Engagement)"],
-      learningModes: ["อบรมในห้องเรียน/เวิร์คช็อป", "อบรมออนไลน์แบบ Virtual (Live)", "เรียนรู้ด้วยตนเอง (E-Learning/VDO)", "การสอนงานจากผู้เชี่ยวชาญ (OJT/Mentoring)", "การศึกษาดูงาน/เยี่ยมชมสถานจริง" "Other:"],
+      learningModes: ["อบรมภายใน/เวิร์คช็อป", "อบรมออนไลน์แบบ Virtual", "เรียนรู้ด้วยตนเอง (E-Learning/VDO)", "การสอนงานจากผู้เชี่ยวชาญ (OJT/Mentoring)", "การศึกษาดูงาน/เยี่ยมชมสถานจริง", "Other:"],
       obstacles: ["ไม่สะดวกด้านเวลา (ติดงาน/ประชุม)", "เนื้อหาหลักสูตรไม่ตรงกับความต้องการ", "สถานที่อบรมไม่สะดวกในการเดินทาง", "Other:"]
     };
 
@@ -335,6 +336,10 @@
     document.querySelectorAll('#obstacles input').forEach(r => r.addEventListener('change', () => {
       const checked = document.querySelector('#obstacles input[value="Other:"]:checked');
       document.getElementById('obstacleOther').classList.toggle('hidden', !checked);
+    }));
+     document.querySelectorAll('#learningModes input').forEach(r => r.addEventListener('change', () => {
+      const checked = document.querySelector('#learningModes input[value="Other:"]:checked');
+      document.getElementById('learningModesOther').classList.toggle('hidden', !checked);
     }));
 
     function getChecked(id) {
