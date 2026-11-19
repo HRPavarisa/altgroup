@@ -108,12 +108,6 @@
         <p class="text-sm text-slate-500 mt-1">กรุณาเลือกทักษะที่ต้องการพัฒนา และระบุหัวข้อ IDP
           เพื่อใช้ประกอบการจัดทำแผนฝึกอบรม</p>
       </div>
-      <div class="flex gap-2">
-        <button onclick="showDashboard()"
-          class="rounded-xl bg-white border border-slate-200 px-4 py-2 text-sm text-slate-700 hover:bg-emerald-50/60 hover:border-emerald-300 transition">ดูข้อมูลที่บันทึก</button>
-        <button onclick="exportCSV()"
-          class="rounded-xl btn-alt-primary px-4 py-2 text-sm font-medium shadow-sm">Export CSV</button>
-      </div>
     </div>
 
     <form id="survey" class="space-y-5">
@@ -278,15 +272,7 @@
       </div>
     </form>
 
-    <section id="dash" class="card p-5 mt-7 hidden">
-      <div class="flex flex-wrap justify-between items-center gap-2">
-        <h3 class="font-semibold text-[#007934]">ข้อมูลที่บันทึกในเครื่องนี้</h3>
-        <button onclick="hideDashboard()" class="text-sm font-medium text-[#007934] hover:underline">กลับไปแบบฟอร์ม</button>
-      </div>
-      <p class="text-sm text-slate-500 mt-2" id="recordCount"></p>
-      <div id="records" class="space-y-3 mt-4"></div>
-      <button onclick="clearRecords()" class="mt-4 text-sm text-rose-600 hover:underline">ลบข้อมูลทดลองที่บันทึกไว้</button>
-    </section>
+
 
     <div id="toast"
       class="fixed bottom-5 left-1/2 -translate-x-1/2 bg-[#052e16] border border-[#54a832] text-white px-5 py-3 rounded-xl shadow-lg hidden">
@@ -420,47 +406,6 @@
       }
     });
 
-    function showDashboard() {
-      document.getElementById('dash').classList.remove('hidden');
-      document.getElementById('dash').scrollIntoView({ behavior: 'smooth' });
-      let d = getRecords();
-      document.getElementById('recordCount').textContent = `มีข้อมูลสำรองใน Browser นี้ ${d.length} รายการ (ยังไม่ใช่ข้อมูลจากฐานกลาง)`;
-      document.getElementById('records').innerHTML = d.map((r, i) => `<div class="border border-emerald-100 bg-emerald-50/20 rounded-xl p-3"><div class="flex justify-between gap-3"><strong class="text-[#007934]">รายการ ${i + 1}: ${r.name || 'ไม่ระบุชื่อ'}</strong><span class="text-xs text-slate-500">${new Date(r.submittedAt).toLocaleString('th-TH')}</span></div><div class="text-sm mt-1">${r.company || "ยังไม่ระบุบริษัท"} · ${r.department} · ${r.level}</div><div class="text-sm mt-2"><b>IDP:</b> ${r.idp.join(' / ')}</div></div>`).join('') || '<p class="text-slate-500">ยังไม่มีข้อมูล</p>';
-    }
-    function hideDashboard() { document.getElementById('dash').classList.add('hidden'); }
-    function clearRecords() {
-      if (confirm('ลบข้อมูลที่เก็บไว้ใน Browser นี้ทั้งหมด?')) {
-        localStorage.removeItem(KEY);
-        showDashboard();
-        showToast('ลบข้อมูลทดลองแล้ว');
-      }
-    }
-
-    function exportCSV() {
-      let data = getRecords();
-      if (!data.length) { showToast('ยังไม่มีข้อมูลให้ Export'); return; }
-      let flat = data.map(r => ({
-        วันที่: r.submittedAt,
-        บริษัท: r.company,
-        ชื่อ: r.name,
-        หน่วยงาน: r.department,
-        ระดับตำแหน่ง: r.level,
-        ทักษะเทคนิค: [...r.skills.network, ...r.skills.quality, ...r.skills.newTech, r.skills.techOther].filter(Boolean).join('|'),
-        ทักษะจัดการ: [...r.skills.management, ...r.skills.legalSafety, r.skills.managementOther].filter(Boolean).join('|'),
-        SoftSkills: [...r.skills.softBasics, ...r.skills.digitalThinking, ...r.skills.leadership, r.skills.softOther].filter(Boolean).join('|'),
-        รูปแบบเรียนรู้: Array.isArray(r.learning) ? r.learning.join('|') : r.learning,
-        อุปสรรค: r.obstacles.join('|'),
-        IDP: r.idp.join('|')
-      }));
-      let headers = Object.keys(flat[0]);
-      let csv = [headers.join(','), ...flat.map(row => headers.map(h => '"' + String(row[h] ?? '').replaceAll('"', '""') + '"').join(','))].join('\r\n');
-      let blob = new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8;' });
-      let a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
-      a.download = 'ALT_Group_TNA_2027.csv';
-      a.click();
-      URL.revokeObjectURL(a.href);
-    }
   </script>
 </body>
 
