@@ -1,48 +1,285 @@
 <!DOCTYPE html>
-<html lang="th"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ALT Group | Training Needs Survey 2027</title>
-<script src="https://cdn.tailwindcss.com"></script><link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet"><style>body{font-family:Prompt,sans-serif;background:#f4f7fb}.card{background:white;border:1px solid #e2e8f0;border-radius:18px;box-shadow:0 3px 14px #0f172a08}.sectionhead{background:#f8fafc;border-bottom:1px solid #e2e8f0}.checkrow{display:flex;gap:.65rem;align-items:flex-start;padding:.7rem .8rem;border:1px solid #e5eaf0;border-radius:12px;background:#fff;cursor:pointer}.checkrow:hover{background:#f8fbff;border-color:#93c5fd}.checkrow input{margin-top:4px;accent-color:#2563eb}.field{width:100%;border:1px solid #dbe2ea;border-radius:10px;padding:.7rem .8rem;background:#fbfdff;outline:none}.field:focus{border-color:#60a5fa;box-shadow:0 0 0 3px #bfdbfe66}.required:after{content:' *';color:#e11d48}.pill{border:1px solid #dbeafe;background:#eff6ff;color:#1d4ed8;border-radius:999px;padding:.25rem .65rem;font-size:.75rem}</style></head>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>ALT Group | Training Needs Survey 2027</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: Prompt, sans-serif;
+            background: #f4f7fb
+        }
+
+        .card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 18px;
+            box-shadow: 0 3px 14px #185a3108
+        }
+
+        .sectionhead {
+            background: #f8fafc;
+            border-bottom: 1px solid #e2e8f0
+        }
+
+        .checkrow {
+            display: flex;
+            gap: .65rem;
+            align-items: flex-start;
+            padding: .7rem .8rem;
+            border: 1px solid #e5eaf0;
+            border-radius: 12px;
+            background: #fff;
+            cursor: pointer
+        }
+
+        .checkrow:hover {
+            background: #f8fbff;
+            border-color: #93c5fd
+        }
+
+        .checkrow input {
+            margin-top: 4px;
+            accent-color: #25eb71
+        }
+
+        .field {
+            width: 100%;
+            border: 1px solid #dbe2ea;
+            border-radius: 10px;
+            padding: .7rem .8rem;
+            background: #fbfdff;
+            outline: none
+        }
+
+        .field:focus {
+            border-color: #60fa8c;
+            box-shadow: 0 0 0 3px #bfdbfe66
+        }
+
+        .required:after {
+            content: ' *';
+            color: #e11d48
+        }
+
+        .pill {
+            border: 1px solid #dbeafe;
+            background: #eff6ff;
+            color: #1dd83f;
+            border-radius: 999px;
+            padding: .25rem .65rem;
+            font-size: .75rem
+        }
+    </style>
+</head>
+
 <body class="min-h-screen text-slate-800">
-<header class="bg-gradient-to-r from-slate-950 via-blue-900 to-sky-700 text-white"><div class="max-w-5xl mx-auto px-4 py-8"><div class="text-sm text-blue-100 mb-2">ALT GROUP · PEOPLE DEVELOPMENT</div><h1 class="text-2xl md:text-3xl font-semibold">Training Needs Survey 2027</h1><p class="mt-2 text-blue-100 max-w-3xl">แบบสำรวจความจำเป็นในการพัฒนาทักษะและการฝึกอบรมประจำปี 2570</p><div class="mt-4 flex flex-wrap gap-2"><span class="pill">Questionnaire from provided Google Forms screenshots</span><span class="pill">Connected to ALT Group Backend · Test mode</span></div></div></header>
-<main class="max-w-5xl mx-auto px-4 py-7"><div class="grid md:grid-cols-[1fr_auto] gap-4 items-start mb-5"><div><h2 class="text-xl font-semibold">แบบสำรวจความจำเป็นในการพัฒนาบุคลากร</h2><p class="text-sm text-slate-500 mt-1">กรุณาเลือกทักษะที่ต้องการพัฒนา และระบุหัวข้อ IDP เพื่อใช้ประกอบการจัดทำแผนฝึกอบรม</p></div><div class="flex gap-2"><button onclick="showDashboard()" class="rounded-xl bg-white border border-slate-200 px-4 py-2 text-sm hover:bg-slate-50">ดูข้อมูลที่บันทึก</button><button onclick="exportCSV()" class="rounded-xl bg-blue-700 text-white px-4 py-2 text-sm hover:bg-blue-800">Export CSV</button></div></div>
-<form id="survey" class="space-y-5">
-<section class="card overflow-hidden"><div class="sectionhead px-5 py-4"><h3 class="font-semibold">ส่วนที่ 1: ข้อมูลทั่วไป</h3></div><div class="p-5 space-y-4"><div><label class="block text-sm font-medium mb-1">ชื่อ-นามสกุล (ไม่บังคับ)</label><input id="fullname" class="field" placeholder="ระบุชื่อ-นามสกุล"></div>
-<div><label class="block text-sm font-medium mb-1 required">บริษัท (Company)</label><select id="company" class="field" required><option value="">-- กรุณาเลือกบริษัท --</option><option>ALT TELECOMMUNICATION</option><option>INNOVA TELECOMMUNICATION</option><option>GROUP TECH SOLUTIONS CO., LTD.</option><option>INFORMATION HIGHWAY COMPANY LIMITED</option><option>SMART INFRANET COMPANY LIMITED (SIC)</option><option>ENERGY MAX CO., LTD.</option><option>I21.CO.TH</option><option>INTERGATEWAY.CO.TH</option></select></div>
-<div><label class="block text-sm font-medium mb-1 required">หน่วยงาน/สังกัดที่ท่านปฏิบัติงาน (กรุณาเลือก 1 ข้อ)</label><div class="grid md:grid-cols-2 gap-2" id="departmentRadios"></div><input id="deptOther" class="field mt-2 hidden" placeholder="ระบุหน่วยงานอื่น"></div>
-<div><label class="block text-sm font-medium mb-1 required">ระดับตำแหน่งงาน (กรุณาเลือก 1 ข้อ)</label><div class="grid md:grid-cols-2 gap-2"><label class="checkrow"><input type="radio" name="level" value="พนักงานทั่วไป/ปฏิบัติการ (Staff/Officer)"><span>พนักงานทั่วไป/ปฏิบัติการ (Staff/Officer)</span></label><label class="checkrow"><input type="radio" name="level" value="หัวหน้าทีม/ซูเปอร์ไวเซอร์ (Supervisor/Team Lead)"><span>หัวหน้าทีม/ซูเปอร์ไวเซอร์ (Supervisor/Team Lead)</span></label><label class="checkrow"><input type="radio" name="level" value="ผู้จัดการ/ผู้บริหารระดับกลางขึ้นไป (Manager/Executive)"><span>ผู้จัดการ/ผู้บริหารระดับกลางขึ้นไป (Manager/Executive)</span></label></div></div></div></section>
-<section class="card overflow-hidden"><div class="sectionhead px-5 py-4"><h3 class="font-semibold">ส่วนที่ 2: ทักษะที่จำเป็นในการปฏิบัติงาน</h3><p class="text-xs text-slate-500 mt-1">โปรดเลือกทักษะที่ท่านคิดว่ามีความจำเป็นต้องได้รับการพัฒนา/ฝึกอบรมในปีนี้ (เลือกได้มากกว่า 1 ข้อในแต่ละกลุ่ม)</p></div><div class="p-5 space-y-6">
-<div><h4 class="font-semibold mb-3">A. ทักษะเฉพาะทางด้านเทคนิคและกระบวนการ (Technical & Process Functional Skills)</h4><div class="space-y-4">
-<div><p class="font-medium text-sm mb-2">โครงข่ายเฉพาะทาง:</p><div class="grid gap-2" id="tech-network"></div></div>
-<div><p class="font-medium text-sm mb-2">การผลิต/คุณภาพ:</p><div class="grid gap-2" id="tech-quality"></div></div>
-<div><p class="font-medium text-sm mb-2">เทคโนโลยีใหม่:</p><div class="grid gap-2" id="tech-new"></div></div>
-<div><label class="text-sm font-medium">หัวข้อเทคนิคเฉพาะอื่นๆ ที่ต้องการฝึกอบรม (โปรดระบุ):</label><input id="techOther" class="field mt-2" placeholder="เช่น Cybersecurity, Network Virtualization"></div></div></div>
-<div><h4 class="font-semibold mb-3">B. ทักษะการจัดการและสนับสนุน (Management & Support Skills)</h4><div class="space-y-4"><div><p class="font-medium text-sm mb-2">ด้านบริหารจัดการ:</p><div class="grid gap-2" id="management"></div></div><div><p class="font-medium text-sm mb-2">กฎหมายและความปลอดภัย:</p><div class="grid gap-2" id="legalSafety"></div></div><div><label class="text-sm font-medium">หัวข้อการจัดการอื่นๆ ที่จำเป็น (โปรดระบุ):</label><input id="managementOther" class="field mt-2" placeholder="เช่น การเจรจาต่อรอง, การนำเสนออย่างมืออาชีพ"></div></div></div>
-<div><h4 class="font-semibold mb-3">C. ทักษะส่วนบุคคลและภาวะผู้นำ (Soft Skills & Leadership)</h4><div class="space-y-4"><div><p class="font-medium text-sm mb-2">ทักษะพื้นฐาน:</p><div class="grid gap-2" id="softBasics"></div></div><div><p class="font-medium text-sm mb-2">ด้าน Digital & Thinking:</p><div class="grid gap-2" id="digitalThinking"></div></div><div><p class="font-medium text-sm mb-2">ด้านภาวะผู้นำ:</p><div class="grid gap-2" id="leadership"></div></div><div><label class="text-sm font-medium">ทักษะ Soft Skill อื่นๆ ที่ท่านสนใจเป็นพิเศษ (โปรดระบุ):</label><p class="text-xs text-slate-500 mt-1">เช่น การจัดการความเครียด, การเจรจาต่อรอง</p><input id="softOther" class="field mt-2"></div></div></div></div></section>
-<section class="card overflow-hidden"><div class="sectionhead px-5 py-4"><h3 class="font-semibold">ส่วนที่ 3: รูปแบบการเรียนรู้และข้อเสนอแนะ</h3></div><div class="p-5 space-y-5"><div><label class="block font-medium text-sm mb-2">รูปแบบการเรียนรู้ที่ท่านชื่นชอบที่สุด</label><div class="grid md:grid-cols-2 gap-2" id="learningModes"></div></div><div><label class="block font-medium text-sm mb-2">อุปสรรคสำคัญที่ทำให้ท่านไม่ได้รับการฝึกอบรมโดยท่าน</label><div class="grid gap-2" id="obstacles"></div><input id="obstacleOther" class="field mt-2 hidden" placeholder="ระบุอุปสรรคอื่น"></div></div></section>
-<section class="card overflow-hidden"><div class="sectionhead px-5 py-4"><h3 class="font-semibold">ส่วนที่ 4: โปรระบุหัวข้อการพัฒนาตนเอง (IDP) ที่ท่านให้ความสำคัญเป็นอันดับ 1–3 ที่สุดในปี 2570 เพื่อความก้าวหน้าในสายอาชีพของท่าน</h3></div><div class="p-5 space-y-4"><div><label class="block font-medium text-sm required mb-1">IDP หัวข้อที่ 1 (สำคัญที่สุด)</label><input id="idp1" class="field" required></div><div><label class="block font-medium text-sm required mb-1">IDP หัวข้อที่ 2</label><input id="idp2" class="field" required></div><div><label class="block font-medium text-sm mb-1">IDP หัวข้อที่ 3 (ถ้ามี)</label><input id="idp3" class="field"></div></div></section>
-<div class="flex flex-wrap justify-end gap-3"><button type="reset" class="rounded-xl border border-slate-300 bg-white px-5 py-3">ล้างแบบฟอร์ม</button><button class="rounded-xl bg-blue-700 text-white px-6 py-3 font-medium shadow hover:bg-blue-800">ส่งแบบสำรวจ</button></div></form>
-<section id="dash" class="card p-5 mt-7 hidden"><div class="flex flex-wrap justify-between items-center gap-2"><h3 class="font-semibold">ข้อมูลที่บันทึกในเครื่องนี้</h3><button onclick="hideDashboard()" class="text-sm text-blue-700">กลับไปแบบฟอร์ม</button></div><p class="text-sm text-slate-500 mt-2" id="recordCount"></p><div id="records" class="space-y-3 mt-4"></div><button onclick="clearRecords()" class="mt-4 text-sm text-rose-600">ลบข้อมูลทดลองที่บันทึกไว้</button></section>
-<div id="toast" class="fixed bottom-5 left-1/2 -translate-x-1/2 bg-slate-900 text-white px-5 py-3 rounded-xl shadow-lg hidden"></div></main>
-<script>
-const groups={
- departments:["กลุ่มปฏิบัติการโครงข่าย: วิศวกรรม, โครงการ, ติดตั้ง, บำรุงรักษา (Network Operations)","กลุ่มการผลิตและคุณภาพ: การผลิต, ควบคุมคุณภาพ, งานซ่อมและทดสอบ (Production, QC, Repair)","กลุ่มขาย/ธุรกิจ (Sales, Marketing, Business Development)","กลุ่มงานสนับสนุน (บัญชี, การเงิน, บุคคล, ธุรการ, กฎหมาย, IT, QMS, จัดซื้อและคลังสินค้า, เลขาฯ)","Other:"],
- network:["ระบบเคเบิลใต้น้ำ (Subsea Cable Systems): การจัดการโครงข่ายใต้น้ำ, Cable Landing","Advanced Fiber Optic (FO): การวางแผน, การออกแบบโครงข่าย, การจัดการ Capacity (ODF/DWDM)","FO Maintenance: เทคนิคการติดตั้ง, การใช้เครื่องมือเฉพาะทาง (Splicer/OTDR), การลดค่า Loss"],
- quality:["ระบบบริหารคุณภาพ (QMS/ISO): การควบคุมเอกสาร, Audit, การจัดการข้อบกพร่อง","Lean / Six Sigma: การเพิ่มประสิทธิภาพกระบวนการผลิตและลดความสูญเปล่า","การซ่อมและทดสอบ: เทคนิคการวินิจฉัยข้อบกพร่อง (Fault Diagnosis) และมาตรฐานการสอบเทียบเครื่องมือ (Calibration)"],
- newTech:["5G/IoT Solutions: ความรู้เชิงลึกเกี่ยวกับแอปพลิเคชันและบริการ","พลังงานทดแทน/Smart Grid: การติดตั้งและบำรุงรักษาระบบพลังงานแสงอาทิตย์","Digital & Cloud: ความรู้พื้นฐานด้าน Cloud, Edge Computing, Data Center"],
- management:["การบริหารโครงการ (Project Management): ให้ตรงตามเวลาและงบประมาณ","การเงินสำหรับผู้ไม่ใช่นักบัญชี (Finance for Non-Finance) และการวิเคราะห์ต้นทุนโครงการ","การบริหารความเสี่ยงทางธุรกิจและโครงการ"],legalSafety:["กฎหมายและมาตรฐาน (PDPA, กฎหมายแรงงาน, ISO) ที่เกี่ยวข้องกับงาน","ความปลอดภัยในการทำงานบนที่สูง/ไฟฟ้า (Safety & OHS)"],
- softBasics:["ภาษาอังกฤษเพื่อการสื่อสาร/ธุรกิจ (Business English)","ทักษะคอมพิวเตอร์พื้นฐาน: Microsoft Excel (ขั้นสูง), การใช้ Word/PowerPoint อย่างมีประสิทธิภาพ","การสื่อสารและการประสานงานข้ามสายงานอย่างมีประสิทธิภาพ"],digitalThinking:["Critical Thinking และการแก้ไขปัญหาที่ซับซ้อน","การใช้เครื่องมือ AI (เช่น ChatGPT) เพื่อเพิ่มประสิทธิภาพงานประจำ"],leadership:["การโค้ชและการสอนงาน (Coaching & Mentoring)","การบริหารการเปลี่ยนแปลง (Change Management)","การสร้างแรงจูงใจและการมีส่วนร่วมของทีม (Employee Engagement)"],learningModes:["อบรมในห้องเรียน/ครึ่งวัน","อบรมออนไลน์แบบ Virtual (Live) ตอน 2","เรียนรู้ด้วยตนเอง (E-Learning/VDO)","การสอนงานจากผู้เชี่ยวชาญ (OJT/Mentoring)","การศึกษาดูงาน/เยี่ยมชมสถานจริง"],obstacles:["ไม่สะดวกด้านเวลา (ติดงาน/ประชุม)","เนื้อหาหลักสูตรไม่ตรงกับความต้องการ","สถานที่อบรมไม่สะดวกในการเดินทาง","Other:"]};
-const companyList=["ALT TELECOMMUNICATION","INNOVA TELECOMMUNICATION","GROUP TECH SOLUTIONS CO., LTD.","INFORMATION HIGHWAY COMPANY LIMITED","SMART INFRANET COMPANY LIMITED (SIC)","ENERGY MAX CO., LTD.","I21.CO.TH","INTERGATEWAY.CO.TH"];
-function checkList(id,items){document.getElementById(id).innerHTML=items.map((x,i)=>`<label class="checkrow"><input type="checkbox" name="${id}" value="${x.replaceAll('"','&quot;')}"><span class="text-sm">${x}</span></label>`).join('')}
-function radios(id,items,name){document.getElementById(id).innerHTML=items.map(x=>`<label class="checkrow"><input type="radio" name="${name}" value="${x}"><span class="text-sm">${x}</span></label>`).join('')}
-checkList('tech-network',groups.network);checkList('tech-quality',groups.quality);checkList('tech-new',groups.newTech);checkList('management',groups.management);checkList('legalSafety',groups.legalSafety);checkList('softBasics',groups.softBasics);checkList('digitalThinking',groups.digitalThinking);checkList('leadership',groups.leadership);radios('departmentRadios',groups.departments,'department');radios('learningModes',groups.learningModes,'learning');checkList('obstacles',groups.obstacles);
-document.querySelectorAll('input[name="department"]').forEach(r=>r.addEventListener('change',()=>{document.getElementById('deptOther').classList.toggle('hidden',!(r.value==='Other:'&&r.checked));}));document.querySelectorAll('#obstacles input').forEach(r=>r.addEventListener('change',()=>{const checked=document.querySelector('#obstacles input[value="Other:"]:checked');document.getElementById('obstacleOther').classList.toggle('hidden',!checked);}));
-function getChecked(id){return [...document.querySelectorAll(`#${id} input:checked`)].map(x=>x.value)}
-const KEY='alt_tna_2027_v4_local';function getRecords(){try{return JSON.parse(localStorage.getItem(KEY)||'[]')}catch{return []}}
-function showToast(msg){let t=document.getElementById('toast');t.textContent=msg;t.classList.remove('hidden');setTimeout(()=>t.classList.add('hidden'),2600)}
-document.getElementById('survey').addEventListener('submit',async e=>{e.preventDefault();let company=document.getElementById('company').value,dep=document.querySelector('input[name="department"]:checked')?.value,level=document.querySelector('input[name="level"]:checked')?.value,learning=document.querySelector('input[name="learning"]:checked')?.value;if(!company||!dep||!level||!learning||!document.getElementById('idp1').value.trim()||!document.getElementById('idp2').value.trim()){showToast('กรุณากรอกข้อมูลที่จำเป็น: บริษัท, หน่วยงาน, ระดับตำแหน่ง, รูปแบบเรียนรู้ และ IDP 1–2');return}
-let record={submittedAt:new Date().toISOString(),company,name:document.getElementById('fullname').value.trim(),department:dep==='Other:'?document.getElementById('deptOther').value.trim():dep,level,skills:{network:getChecked('tech-network'),quality:getChecked('tech-quality'),newTech:getChecked('tech-new'),techOther:document.getElementById('techOther').value,management:getChecked('management'),legalSafety:getChecked('legalSafety'),managementOther:document.getElementById('managementOther').value,softBasics:getChecked('softBasics'),digitalThinking:getChecked('digitalThinking'),leadership:getChecked('leadership'),softOther:document.getElementById('softOther').value},learning,obstacles:getChecked('obstacles').map(x=>x==='Other:'?document.getElementById('obstacleOther').value:x),idp:[document.getElementById('idp1').value.trim(),document.getElementById('idp2').value.trim(),document.getElementById('idp3').value.trim()].filter(Boolean)};
-// Local backup is retained on this device/browser.
-let local=getRecords();local.unshift(record);localStorage.setItem(KEY,JSON.stringify(local));
-try{await fetch('https://script.google.com/macros/s/AKfycbxbjhfOXuucIXBOfXgI4cY5XuVNYiEzaD0M4LbtBOeerhYBHhyFrPcEWNqMzhsxod00/exec',{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(record)});showToast('ส่งแบบสำรวจแล้วค่ะ โปรดตรวจสอบรายการใน Google Sheets เพื่อยืนยันการบันทึก');e.target.reset();document.getElementById('deptOther').classList.add('hidden');document.getElementById('obstacleOther').classList.add('hidden');}catch(err){showToast('ส่งข้อมูลไป Backend ไม่สำเร็จ ข้อมูลสำรองยังอยู่ใน Browser นี้');console.error(err);}});
-function showDashboard(){document.getElementById('dash').classList.remove('hidden');document.getElementById('dash').scrollIntoView({behavior:'smooth'});let d=getRecords();document.getElementById('recordCount').textContent=`มีข้อมูลสำรองใน Browser นี้ ${d.length} รายการ (ยังไม่ใช่ข้อมูลจากฐานกลาง)`;document.getElementById('records').innerHTML=d.map((r,i)=>`<div class="border rounded-xl p-3"><div class="flex justify-between gap-3"><strong>รายการ ${i+1}: ${r.name||'ไม่ระบุชื่อ'}</strong><span class="text-xs text-slate-500">${new Date(r.submittedAt).toLocaleString('th-TH')}</span></div><div class="text-sm mt-1">${r.company||"ยังไม่ระบุบริษัท"} · ${r.department} · ${r.level}</div><div class="text-sm mt-2"><b>IDP:</b> ${r.idp.join(' / ')}</div></div>`).join('')||'<p class="text-slate-500">ยังไม่มีข้อมูล</p>'}function hideDashboard(){document.getElementById('dash').classList.add('hidden')}function clearRecords(){if(confirm('ลบข้อมูลที่เก็บไว้ใน Browser นี้ทั้งหมด?')){localStorage.removeItem(KEY);showDashboard();showToast('ลบข้อมูลทดลองแล้ว')}}
-function exportCSV(){let data=getRecords();if(!data.length){showToast('ยังไม่มีข้อมูลให้ Export');return}let flat=data.map(r=>({วันที่:r.submittedAt,บริษัท:r.company,ชื่อ:r.name,หน่วยงาน:r.department,ระดับตำแหน่ง:r.level,ทักษะเทคนิค:[...r.skills.network,...r.skills.quality,...r.skills.newTech,r.skills.techOther].filter(Boolean).join('|'),ทักษะจัดการ:[...r.skills.management,...r.skills.legalSafety,r.skills.managementOther].filter(Boolean).join('|'),SoftSkills:[...r.skills.softBasics,...r.skills.digitalThinking,...r.skills.leadership,r.skills.softOther].filter(Boolean).join('|'),รูปแบบเรียนรู้:r.learning,อุปสรรค:r.obstacles.join('|'),IDP:r.idp.join('|')}));let headers=Object.keys(flat[0]);let csv=[headers.join(','),...flat.map(row=>headers.map(h=>'"'+String(row[h]??'').replaceAll('"','""')+'"').join(','))].join('\r\n');let blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8;'});let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='ALT_Group_TNA_2027.csv';a.click();URL.revokeObjectURL(a.href)}
-</script></body></html>
+    <header class="bg-gradient-to-r from-slate-950 via-blue-900 to-sky-700 text-white">
+        <div class="max-w-5xl mx-auto px-4 py-8">
+            <div class="text-sm text-blue-100 mb-2">ALT GROUP · PEOPLE DEVELOPMENT</div>
+            <h1 class="text-2xl md:text-3xl font-semibold">Training Needs Survey 2027</h1>
+            <p class="mt-2 text-blue-100 max-w-3xl">แบบสำรวจความจำเป็นในการพัฒนาทักษะและการฝึกอบรมประจำปี 2570</p>
+            
+        </div>
+    </header>
+    <main class="max-w-5xl mx-auto px-4 py-7">
+        <div class="grid md:grid-cols-[1fr_auto] gap-4 items-start mb-5">
+            <div>
+                <h2 class="text-xl font-semibold">แบบสำรวจความจำเป็นในการพัฒนาบุคลากร</h2>
+                <p class="text-sm text-slate-500 mt-1">กรุณาเลือกทักษะที่ต้องการพัฒนา และระบุหัวข้อ IDP
+                    เพื่อใช้ประกอบการจัดทำแผนฝึกอบรม</p>
+            </div>
+            <div class="flex gap-2"><button onclick="showDashboard()"
+                    class="rounded-xl bg-white border border-slate-200 px-4 py-2 text-sm hover:bg-slate-50">ดูข้อมูลที่บันทึก</button><button
+                    onclick="exportCSV()"
+                    class="rounded-xl bg-blue-700 text-white px-4 py-2 text-sm hover:bg-blue-800">Export CSV</button>
+            </div>
+        </div>
+        <form id="survey" class="space-y-5">
+            <section class="card overflow-hidden">
+                <div class="sectionhead px-5 py-4">
+                    <h3 class="font-semibold">ส่วนที่ 1: ข้อมูลทั่วไป</h3>
+                </div>
+                <div class="p-5 space-y-4">
+                    <div><label class="block text-sm font-medium mb-1">ชื่อ-นามสกุล (ไม่บังคับ)</label><input
+                            id="fullname" class="field" placeholder="ระบุชื่อ-นามสกุล"></div>
+                    <div><label class="block text-sm font-medium mb-1 required">บริษัท (Company)</label><select
+                            id="company" class="field" required>
+                            <option value="">-- กรุณาเลือกบริษัท --</option>
+                            <option>ALT TELECOMMUNICATION</option>
+                            <option>INNOVA TELECOMMUNICATION</option>
+                            <option>GROUP TECH SOLUTIONS CO., LTD.</option>
+                            <option>INFORMATION HIGHWAY COMPANY LIMITED</option>
+                            <option>SMART INFRANET COMPANY LIMITED (SIC)</option>
+                            <option>ENERGY MAX CO., LTD.</option>
+                            <option>I21.CO.TH</option>
+                            <option>INTERGATEWAY.CO.TH</option>
+                        </select></div>
+                    <div><label class="block text-sm font-medium mb-1 required">หน่วยงาน/สังกัดที่ท่านปฏิบัติงาน
+                            (กรุณาเลือก 1 ข้อ)</label>
+                        <div class="grid md:grid-cols-2 gap-2" id="departmentRadios"></div><input id="deptOther"
+                            class="field mt-2 hidden" placeholder="ระบุหน่วยงานอื่น">
+                    </div>
+                    <div><label class="block text-sm font-medium mb-1 required">ระดับตำแหน่งงาน (กรุณาเลือก 1
+                            ข้อ)</label>
+                        <div class="grid md:grid-cols-2 gap-2"><label class="checkrow"><input type="radio" name="level"
+                                    value="พนักงานทั่วไป/ปฏิบัติการ (Staff/Officer)"><span>พนักงานทั่วไป/ปฏิบัติการ
+                                    (Staff/Officer)</span></label><label class="checkrow"><input type="radio"
+                                    name="level"
+                                    value="หัวหน้าทีม/ซูเปอร์ไวเซอร์ (Supervisor/Team Lead)"><span>หัวหน้าทีม/ซูเปอร์ไวเซอร์
+                                    (Supervisor/Team Lead)</span></label><label class="checkrow"><input type="radio"
+                                    name="level"
+                                    value="ผู้จัดการ/ผู้บริหารระดับกลางขึ้นไป (Manager/Executive)"><span>ผู้จัดการ/ผู้บริหารระดับกลางขึ้นไป
+                                    (Manager/Executive)</span></label></div>
+                    </div>
+                </div>
+            </section>
+            <section class="card overflow-hidden">
+                <div class="sectionhead px-5 py-4">
+                    <h3 class="font-semibold">ส่วนที่ 2: ทักษะที่จำเป็นในการปฏิบัติงาน</h3>
+                    <p class="text-xs text-slate-500 mt-1">
+                        โปรดเลือกทักษะที่ท่านคิดว่ามีความจำเป็นต้องได้รับการพัฒนา/ฝึกอบรมในปีนี้ (เลือกได้มากกว่า 1
+                        ข้อในแต่ละกลุ่ม)</p>
+                </div>
+                <div class="p-5 space-y-6">
+                    <div>
+                        <h4 class="font-semibold mb-3">A. ทักษะเฉพาะทางด้านเทคนิคและกระบวนการ (Technical & Process
+                            Functional Skills)</h4>
+                        <div class="space-y-4">
+                            <div>
+                                <p class="font-medium text-sm mb-2">โครงข่ายเฉพาะทาง:</p>
+                                <div class="grid gap-2" id="tech-network"></div>
+                            </div>
+                            <div>
+                                <p class="font-medium text-sm mb-2">การผลิต/คุณภาพ:</p>
+                                <div class="grid gap-2" id="tech-quality"></div>
+                            </div>
+                            <div>
+                                <p class="font-medium text-sm mb-2">เทคโนโลยีใหม่:</p>
+                                <div class="grid gap-2" id="tech-new"></div>
+                            </div>
+                            <div><label class="text-sm font-medium">หัวข้อเทคนิคเฉพาะอื่นๆ ที่ต้องการฝึกอบรม
+                                    (โปรดระบุ):</label><input id="techOther" class="field mt-2"
+                                    placeholder="เช่น Cybersecurity, Network Virtualization"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold mb-3">B. ทักษะการจัดการและสนับสนุน (Management & Support Skills)</h4>
+                        <div class="space-y-4">
+                            <div>
+                                <p class="font-medium text-sm mb-2">ด้านบริหารจัดการ:</p>
+                                <div class="grid gap-2" id="management"></div>
+                            </div>
+                            <div>
+                                <p class="font-medium text-sm mb-2">กฎหมายและความปลอดภัย:</p>
+                                <div class="grid gap-2" id="legalSafety"></div>
+                            </div>
+                            <div><label class="text-sm font-medium">หัวข้อการจัดการอื่นๆ ที่จำเป็น
+                                    (โปรดระบุ):</label><input id="managementOther" class="field mt-2"
+                                    placeholder="เช่น การเจรจาต่อรอง, การนำเสนออย่างมืออาชีพ"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold mb-3">C. ทักษะส่วนบุคคลและภาวะผู้นำ (Soft Skills & Leadership)</h4>
+                        <div class="space-y-4">
+                            <div>
+                                <p class="font-medium text-sm mb-2">ทักษะพื้นฐาน:</p>
+                                <div class="grid gap-2" id="softBasics"></div>
+                            </div>
+                            <div>
+                                <p class="font-medium text-sm mb-2">ด้าน Digital & Thinking:</p>
+                                <div class="grid gap-2" id="digitalThinking"></div>
+                            </div>
+                            <div>
+                                <p class="font-medium text-sm mb-2">ด้านภาวะผู้นำ:</p>
+                                <div class="grid gap-2" id="leadership"></div>
+                            </div>
+                            <div><label class="text-sm font-medium">ทักษะ Soft Skill อื่นๆ ที่ท่านสนใจเป็นพิเศษ
+                                    (โปรดระบุ):</label>
+                                <p class="text-xs text-slate-500 mt-1">เช่น การจัดการความเครียด, การเจรจาต่อรอง</p>
+                                <input id="softOther" class="field mt-2">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="card overflow-hidden">
+                <div class="sectionhead px-5 py-4">
+                    <h3 class="font-semibold">ส่วนที่ 3: รูปแบบการเรียนรู้และข้อเสนอแนะ</h3>
+                </div>
+                <div class="p-5 space-y-5">
+                    <div><label class="block font-medium text-sm mb-2">รูปแบบการเรียนรู้ที่ท่านชื่นชอบที่สุด</label>
+                        <div class="grid md:grid-cols-2 gap-2" id="learningModes"></div>
+                    </div>
+                    <div><label
+                            class="block font-medium text-sm mb-2">อุปสรรคสำคัญที่ทำให้ท่านไม่ได้รับการฝึกอบรมโดยท่าน</label>
+                        <div class="grid gap-2" id="obstacles"></div><input id="obstacleOther" class="field mt-2 hidden"
+                            placeholder="ระบุอุปสรรคอื่น">
+                    </div>
+                </div>
+            </section>
+            <section class="card overflow-hidden">
+                <div class="sectionhead px-5 py-4">
+                    <h3 class="font-semibold">ส่วนที่ 4: โปรระบุหัวข้อการพัฒนาตนเอง (IDP) ที่ท่านให้ความสำคัญเป็นอันดับ
+                        1–3 ที่สุดในปี 2570 เพื่อความก้าวหน้าในสายอาชีพของท่าน</h3>
+                </div>
+                <div class="p-5 space-y-4">
+                    <div><label class="block font-medium text-sm required mb-1">IDP หัวข้อที่ 1
+                            (สำคัญที่สุด)</label><input id="idp1" class="field" required></div>
+                    <div><label class="block font-medium text-sm required mb-1">IDP หัวข้อที่ 2</label><input id="idp2"
+                            class="field" required></div>
+                    <div><label class="block font-medium text-sm mb-1">IDP หัวข้อที่ 3 (ถ้ามี)</label><input id="idp3"
+                            class="field"></div>
+                </div>
+            </section>
+            <div class="flex flex-wrap justify-end gap-3"><button type="reset"
+                    class="rounded-xl border border-slate-300 bg-white px-5 py-3">ล้างแบบฟอร์ม</button><button
+                    class="rounded-xl bg-blue-700 text-white px-6 py-3 font-medium shadow hover:bg-blue-800">ส่งแบบสำรวจ</button>
+            </div>
+        </form>
+        <section id="dash" class="card p-5 mt-7 hidden">
+            <div class="flex flex-wrap justify-between items-center gap-2">
+                <h3 class="font-semibold">ข้อมูลที่บันทึกในเครื่องนี้</h3><button onclick="hideDashboard()"
+                    class="text-sm text-blue-700">กลับไปแบบฟอร์ม</button>
+            </div>
+            <p class="text-sm text-slate-500 mt-2" id="recordCount"></p>
+            <div id="records" class="space-y-3 mt-4"></div><button onclick="clearRecords()"
+                class="mt-4 text-sm text-rose-600">ลบข้อมูลทดลองที่บันทึกไว้</button>
+        </section>
+        <div id="toast"
+            class="fixed bottom-5 left-1/2 -translate-x-1/2 bg-slate-900 text-white px-5 py-3 rounded-xl shadow-lg hidden">
+        </div>
+    </main>
+    <script>
+        const groups = {
+            departments: ["กลุ่มปฏิบัติการโครงข่าย: วิศวกรรม, โครงการ, ติดตั้ง, บำรุงรักษา (Network Operations)", "กลุ่มการผลิตและคุณภาพ: การผลิต, ควบคุมคุณภาพ, งานซ่อมและทดสอบ (Production, QC, Repair)", "กลุ่มขาย/ธุรกิจ (Sales, Marketing, Business Development)", "กลุ่มงานสนับสนุน (บัญชี, การเงิน, บุคคล, ธุรการ, กฎหมาย, IT, QMS, จัดซื้อและคลังสินค้า, เลขาฯ)", "Other:"],
+            network: ["ระบบเคเบิลใต้น้ำ (Subsea Cable Systems): การจัดการโครงข่ายใต้น้ำ, Cable Landing", "Advanced Fiber Optic (FO): การวางแผน, การออกแบบโครงข่าย, การจัดการ Capacity (ODF/DWDM)", "FO Maintenance: เทคนิคการติดตั้ง, การใช้เครื่องมือเฉพาะทาง (Splicer/OTDR), การลดค่า Loss"],
+            quality: ["ระบบบริหารคุณภาพ (QMS/ISO): การควบคุมเอกสาร, Audit, การจัดการข้อบกพร่อง", "Lean / Six Sigma: การเพิ่มประสิทธิภาพกระบวนการผลิตและลดความสูญเปล่า", "การซ่อมและทดสอบ: เทคนิคการวินิจฉัยข้อบกพร่อง (Fault Diagnosis) และมาตรฐานการสอบเทียบเครื่องมือ (Calibration)"],
+            newTech: ["5G/IoT Solutions: ความรู้เชิงลึกเกี่ยวกับแอปพลิเคชันและบริการ", "พลังงานทดแทน/Smart Grid: การติดตั้งและบำรุงรักษาระบบพลังงานแสงอาทิตย์", "Digital & Cloud: ความรู้พื้นฐานด้าน Cloud, Edge Computing, Data Center"],
+            management: ["การบริหารโครงการ (Project Management): ให้ตรงตามเวลาและงบประมาณ", "การเงินสำหรับผู้ไม่ใช่นักบัญชี (Finance for Non-Finance) และการวิเคราะห์ต้นทุนโครงการ", "การบริหารความเสี่ยงทางธุรกิจและโครงการ"], legalSafety: ["กฎหมายและมาตรฐาน (PDPA, กฎหมายแรงงาน, ISO) ที่เกี่ยวข้องกับงาน", "ความปลอดภัยในการทำงานบนที่สูง/ไฟฟ้า (Safety & OHS)"],
+            softBasics: ["ภาษาอังกฤษเพื่อการสื่อสาร/ธุรกิจ (Business English)", "ทักษะคอมพิวเตอร์พื้นฐาน: Microsoft Excel (ขั้นสูง), การใช้ Word/PowerPoint อย่างมีประสิทธิภาพ", "การสื่อสารและการประสานงานข้ามสายงานอย่างมีประสิทธิภาพ"], digitalThinking: ["Critical Thinking และการแก้ไขปัญหาที่ซับซ้อน", "การใช้เครื่องมือ AI (เช่น ChatGPT) เพื่อเพิ่มประสิทธิภาพงานประจำ"], leadership: ["การโค้ชและการสอนงาน (Coaching & Mentoring)", "การบริหารการเปลี่ยนแปลง (Change Management)", "การสร้างแรงจูงใจและการมีส่วนร่วมของทีม (Employee Engagement)"], learningModes: ["อบรมในห้องเรียน/ครึ่งวัน", "อบรมออนไลน์แบบ Virtual (Live) ตอน 2", "เรียนรู้ด้วยตนเอง (E-Learning/VDO)", "การสอนงานจากผู้เชี่ยวชาญ (OJT/Mentoring)", "การศึกษาดูงาน/เยี่ยมชมสถานจริง"], obstacles: ["ไม่สะดวกด้านเวลา (ติดงาน/ประชุม)", "เนื้อหาหลักสูตรไม่ตรงกับความต้องการ", "สถานที่อบรมไม่สะดวกในการเดินทาง", "Other:"]
+        };
+        const companyList = ["ALT TELECOMMUNICATION", "INNOVA TELECOMMUNICATION", "GROUP TECH SOLUTIONS CO., LTD.", "INFORMATION HIGHWAY COMPANY LIMITED", "SMART INFRANET COMPANY LIMITED (SIC)", "ENERGY MAX CO., LTD.", "I21.CO.TH", "INTERGATEWAY.CO.TH"];
+        function checkList(id, items) { document.getElementById(id).innerHTML = items.map((x, i) => `<label class="checkrow"><input type="checkbox" name="${id}" value="${x.replaceAll('"', '&quot;')}"><span class="text-sm">${x}</span></label>`).join('') }
+        function radios(id, items, name) { document.getElementById(id).innerHTML = items.map(x => `<label class="checkrow"><input type="radio" name="${name}" value="${x}"><span class="text-sm">${x}</span></label>`).join('') }
+        checkList('tech-network', groups.network); checkList('tech-quality', groups.quality); checkList('tech-new', groups.newTech); checkList('management', groups.management); checkList('legalSafety', groups.legalSafety); checkList('softBasics', groups.softBasics); checkList('digitalThinking', groups.digitalThinking); checkList('leadership', groups.leadership); radios('departmentRadios', groups.departments, 'department'); radios('learningModes', groups.learningModes, 'learning'); checkList('obstacles', groups.obstacles);
+        document.querySelectorAll('input[name="department"]').forEach(r => r.addEventListener('change', () => { document.getElementById('deptOther').classList.toggle('hidden', !(r.value === 'Other:' && r.checked)); })); document.querySelectorAll('#obstacles input').forEach(r => r.addEventListener('change', () => { const checked = document.querySelector('#obstacles input[value="Other:"]:checked'); document.getElementById('obstacleOther').classList.toggle('hidden', !checked); }));
+        function getChecked(id) { return [...document.querySelectorAll(`#${id} input:checked`)].map(x => x.value) }
+        const KEY = 'alt_tna_2027_v4_local'; function getRecords() { try { return JSON.parse(localStorage.getItem(KEY) || '[]') } catch { return [] } }
+        function showToast(msg) { let t = document.getElementById('toast'); t.textContent = msg; t.classList.remove('hidden'); setTimeout(() => t.classList.add('hidden'), 2600) }
+        document.getElementById('survey').addEventListener('submit', async e => {
+            e.preventDefault(); let company = document.getElementById('company').value, dep = document.querySelector('input[name="department"]:checked')?.value, level = document.querySelector('input[name="level"]:checked')?.value, learning = document.querySelector('input[name="learning"]:checked')?.value; if (!company || !dep || !level || !learning || !document.getElementById('idp1').value.trim() || !document.getElementById('idp2').value.trim()) { showToast('กรุณากรอกข้อมูลที่จำเป็น: บริษัท, หน่วยงาน, ระดับตำแหน่ง, รูปแบบเรียนรู้ และ IDP 1–2'); return }
+            let record = { submittedAt: new Date().toISOString(), company, name: document.getElementById('fullname').value.trim(), department: dep === 'Other:' ? document.getElementById('deptOther').value.trim() : dep, level, skills: { network: getChecked('tech-network'), quality: getChecked('tech-quality'), newTech: getChecked('tech-new'), techOther: document.getElementById('techOther').value, management: getChecked('management'), legalSafety: getChecked('legalSafety'), managementOther: document.getElementById('managementOther').value, softBasics: getChecked('softBasics'), digitalThinking: getChecked('digitalThinking'), leadership: getChecked('leadership'), softOther: document.getElementById('softOther').value }, learning, obstacles: getChecked('obstacles').map(x => x === 'Other:' ? document.getElementById('obstacleOther').value : x), idp: [document.getElementById('idp1').value.trim(), document.getElementById('idp2').value.trim(), document.getElementById('idp3').value.trim()].filter(Boolean) };
+            // Local backup is retained on this device/browser.
+            let local = getRecords(); local.unshift(record); localStorage.setItem(KEY, JSON.stringify(local));
+            try { await fetch('https://script.google.com/macros/s/AKfycbxbjhfOXuucIXBOfXgI4cY5XuVNYiEzaD0M4LbtBOeerhYBHhyFrPcEWNqMzhsxod00/exec', { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(record) }); showToast('ส่งแบบสำรวจแล้วค่ะ โปรดตรวจสอบรายการใน Google Sheets เพื่อยืนยันการบันทึก'); e.target.reset(); document.getElementById('deptOther').classList.add('hidden'); document.getElementById('obstacleOther').classList.add('hidden'); } catch (err) { showToast('ส่งข้อมูลไป Backend ไม่สำเร็จ ข้อมูลสำรองยังอยู่ใน Browser นี้'); console.error(err); }
+        });
+        function showDashboard() { document.getElementById('dash').classList.remove('hidden'); document.getElementById('dash').scrollIntoView({ behavior: 'smooth' }); let d = getRecords(); document.getElementById('recordCount').textContent = `มีข้อมูลสำรองใน Browser นี้ ${d.length} รายการ (ยังไม่ใช่ข้อมูลจากฐานกลาง)`; document.getElementById('records').innerHTML = d.map((r, i) => `<div class="border rounded-xl p-3"><div class="flex justify-between gap-3"><strong>รายการ ${i + 1}: ${r.name || 'ไม่ระบุชื่อ'}</strong><span class="text-xs text-slate-500">${new Date(r.submittedAt).toLocaleString('th-TH')}</span></div><div class="text-sm mt-1">${r.company || "ยังไม่ระบุบริษัท"} · ${r.department} · ${r.level}</div><div class="text-sm mt-2"><b>IDP:</b> ${r.idp.join(' / ')}</div></div>`).join('') || '<p class="text-slate-500">ยังไม่มีข้อมูล</p>' } function hideDashboard() { document.getElementById('dash').classList.add('hidden') } function clearRecords() { if (confirm('ลบข้อมูลที่เก็บไว้ใน Browser นี้ทั้งหมด?')) { localStorage.removeItem(KEY); showDashboard(); showToast('ลบข้อมูลทดลองแล้ว') } }
+        function exportCSV() { let data = getRecords(); if (!data.length) { showToast('ยังไม่มีข้อมูลให้ Export'); return } let flat = data.map(r => ({ วันที่: r.submittedAt, บริษัท: r.company, ชื่อ: r.name, หน่วยงาน: r.department, ระดับตำแหน่ง: r.level, ทักษะเทคนิค: [...r.skills.network, ...r.skills.quality, ...r.skills.newTech, r.skills.techOther].filter(Boolean).join('|'), ทักษะจัดการ: [...r.skills.management, ...r.skills.legalSafety, r.skills.managementOther].filter(Boolean).join('|'), SoftSkills: [...r.skills.softBasics, ...r.skills.digitalThinking, ...r.skills.leadership, r.skills.softOther].filter(Boolean).join('|'), รูปแบบเรียนรู้: r.learning, อุปสรรค: r.obstacles.join('|'), IDP: r.idp.join('|') })); let headers = Object.keys(flat[0]); let csv = [headers.join(','), ...flat.map(row => headers.map(h => '"' + String(row[h] ?? '').replaceAll('"', '""') + '"').join(','))].join('\r\n'); let blob = new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8;' }); let a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'ALT_Group_TNA_2027.csv'; a.click(); URL.revokeObjectURL(a.href) }
+    </script>
+</body>
+
+</html>
