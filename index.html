@@ -169,15 +169,15 @@
             <div class="space-y-4">
               <div>
                 <p class="font-medium text-sm text-slate-700 mb-2">โครงข่ายเฉพาะทาง:</p>
-                <div class="grid gap-2" id="tech-network"></div>
+                <input id="networkText" class="field" placeholder="เช่น Subsea Cable Systems, Cable Landing, Fiber Optic, Network Design">
               </div>
               <div>
                 <p class="font-medium text-sm text-slate-700 mb-2">การผลิต/คุณภาพ:</p>
-                <div class="grid gap-2" id="tech-quality"></div>
+                <input id="qualityText" class="field" placeholder="เช่น Quality Control, Quality Assurance, ISO, Lean, Six Sigma">
               </div>
               <div>
                 <p class="font-medium text-sm text-slate-700 mb-2">เทคโนโลยีใหม่:</p>
-                <div class="grid gap-2" id="tech-new"></div>
+                <input id="newTechText" class="field" placeholder="เช่น AI, Cloud, IoT, Data Analytics, Cybersecurity">
               </div>
               <div>
                 <label class="text-sm font-medium">หัวข้อเทคนิคเฉพาะอื่นๆ ที่ต้องการฝึกอบรม (โปรดระบุ):</label>
@@ -345,9 +345,6 @@
   <script>
     const groups = {
       departments: ["กลุ่มปฏิบัติการโครงข่าย: วิศวกรรม, โครงการ, ติดตั้ง, บำรุงรักษา (Network Operations)", "กลุ่มการผลิตและคุณภาพ: การผลิต, ควบคุมคุณภาพ, งานซ่อมและทดสอบ (Production, QC, Repair)", "กลุ่มขาย/ธุรกิจ (Sales, Marketing, Business Development)", "กลุ่มงานสนับสนุน (บัญชี, การเงิน, บุคคล, ธุรการ, กฎหมาย, IT, QMS, จัดซื้อและคลังสินค้า, เลขาฯ)", "Other:"],
-      network: ["ระบบเคเบิลใต้น้ำ (Subsea Cable Systems): การจัดการโครงข่ายใต้น้ำ, Cable Landing", "Advanced Fiber Optic (FO): การวางแผน, การออกแบบโครงข่าย, การจัดการ Capacity (ODF/DWDM)", "FO Maintenance: เทคนิคการติดตั้ง, การใช้เครื่องมือเฉพาะทาง (Splicer/OTDR), การลดค่า Loss"],
-      quality: ["ระบบบริหารคุณภาพ (QMS/ISO): การควบคุมเอกสาร, Audit, การจัดการข้อบกพร่อง", "Lean / Six Sigma: การเพิ่มประสิทธิภาพกระบวนการผลิตและลดความสูญเปล่า", "การซ่อมและทดสอบ: เทคนิคการวินิจฉัยข้อบกพร่อง (Fault Diagnosis) และมาตรฐานการสอบเทียบเครื่องมือ (Calibration)"],
-      newTech: ["5G/IoT Solutions: ความรู้เชิงลึกเกี่ยวกับแอปพลิเคชันและบริการ", "พลังงานทดแทน/Smart Grid: การติดตั้งและบำรุงรักษาระบบพลังงานแสงอาทิตย์", "Digital & Cloud: ความรู้พื้นฐานด้าน Cloud, Edge Computing, Data Center"],
       management: ["การบริหารโครงการ (Project Management): ให้ตรงตามเวลาและงบประมาณ", "การเงินสำหรับผู้ไม่ใช่นักบัญชี (Finance for Non-Finance) และการวิเคราะห์ต้นทุนโครงการ", "การบริหารความเสี่ยงทางธุรกิจและโครงการ"],
       legalSafety: ["กฎหมายและมาตรฐาน (PDPA, กฎหมายแรงงาน, ISO) ที่เกี่ยวข้องกับงาน", "ความปลอดภัยในการทำงานบนที่สูง/ไฟฟ้า (Safety & OHS)"],
       softBasics: ["ภาษาอังกฤษเพื่อการสื่อสาร/ธุรกิจ (Business English)", "ทักษะคอมพิวเตอร์พื้นฐาน: Microsoft Excel (ขั้นสูง), การใช้ Word/PowerPoint อย่างมีประสิทธิภาพ", "การสื่อสารและการประสานงานข้ามสายงานอย่างมีประสิทธิภาพ"],
@@ -366,9 +363,6 @@
       document.getElementById(id).innerHTML = items.map(x => `<label class="checkrow"><input type="radio" name="${name}" value="${x}"><span class="text-sm">${x}</span></label>`).join('');
     }
 
-    checkList('tech-network', groups.network);
-    checkList('tech-quality', groups.quality);
-    checkList('tech-new', groups.newTech);
     checkList('management', groups.management);
     checkList('legalSafety', groups.legalSafety);
     checkList('softBasics', groups.softBasics);
@@ -426,10 +420,10 @@
         department: dep === 'Other:' ? document.getElementById('deptOther').value.trim() : dep,
         level,
         skills: {
-          network: getChecked('tech-network'),
-          quality: getChecked('tech-quality'),
-          newTech: getChecked('tech-new'),
-          techOther: document.getElementById('techOther').value,
+          networkText: document.getElementById('networkText').value.trim(),
+          qualityText: document.getElementById('qualityText').value.trim(),
+          newTechText: document.getElementById('newTechText').value.trim(),
+          techOther: document.getElementById('techOther').value.trim(),
           management: getChecked('management'),
           legalSafety: getChecked('legalSafety'),
           managementOther: document.getElementById('managementOther').value,
@@ -644,7 +638,7 @@ function hideDashboard() {
         ชื่อ: r.name,
         หน่วยงาน: r.department,
         ระดับตำแหน่ง: r.level,
-        ทักษะเทคนิค: [...r.skills.network, ...r.skills.quality, ...r.skills.newTech, r.skills.techOther].filter(Boolean).join('|'),
+        ทักษะเทคนิค: [r.skills.networkText, r.skills.qualityText, r.skills.newTechText, r.skills.techOther].filter(Boolean).join('|'),
         ทักษะจัดการ: [...r.skills.management, ...r.skills.legalSafety, r.skills.managementOther].filter(Boolean).join('|'),
         SoftSkills: [...r.skills.softBasics, ...r.skills.digitalThinking, ...r.skills.leadership, r.skills.softOther].filter(Boolean).join('|'),
         รูปแบบเรียนรู้: Array.isArray(r.learning) ? r.learning.join('|') : r.learning,
