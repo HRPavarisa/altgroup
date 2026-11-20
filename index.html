@@ -577,8 +577,8 @@ function renderCentralStats(data) {
     companyBox.innerHTML =
       '<p class="text-sm text-slate-400">ยังไม่มีข้อมูลบริษัท</p>';
   } else {
+
     companyBox.innerHTML = entries
-     companyBox.innerHTML = entries
   .map(([name, count]) => {
     const value = Number(count || 0);
 
