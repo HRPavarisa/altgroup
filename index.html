@@ -564,52 +564,57 @@ function renderCentralStats(data) {
 
   const totalResponses = Number(data.totalResponses || 0);
   const companies = data.companyCounts || {};
-  const percentages = data.companyPercentages || {};
+
+  // เรียงบริษัทตามลำดับที่กำหนด
+  const companyList = [
+    'ALT', 'EMAX', 'GTS', 'IFH',
+    'IGC', 'I21', 'INN', 'SIC'
+  ];
 
   total.textContent = totalResponses.toLocaleString('th-TH');
 
   status.textContent = 'เชื่อมต่อฐานกลางสำเร็จ ✓';
   status.className = 'mt-4 text-sm text-emerald-700';
 
-  const entries = Object.entries(companies);
+  companyBox.innerHTML = companyList.map(name => {
+    const value = Number(companies[name] || 0);
 
-  if (entries.length === 0) {
-    companyBox.innerHTML =
-      '<p class="text-sm text-slate-400">ยังไม่มีข้อมูลบริษัท</p>';
-  } else {
-    companyBox.innerHTML = entries
-      .map(([name, count]) => {
-        const value = Number(count || 0);
-        const percent = Number(percentages[name] || 0);
+    // คำนวณเปอร์เซ็นต์จากจำนวนผู้ตอบทั้งหมด
+    const percent = totalResponses > 0
+      ? (value / totalResponses) * 100
+      : 0;
 
-        return `
-          <div class="py-3 border-b border-slate-100">
-            <div class="flex justify-between items-center mb-2">
-              <span class="text-sm font-medium text-slate-700">
-                ${escapeHTML(name)}
-              </span>
+    return `
+      <div class="py-3 border-b border-slate-100">
 
-              <div class="text-right">
-                <span class="font-semibold text-[#007934]">
-                  ${value.toLocaleString('th-TH')} คน
-                </span>
-                <span class="text-xs text-slate-500 ml-2">
-                  ${percent.toLocaleString('th-TH')}%
-                </span>
-              </div>
-            </div>
+        <div class="flex justify-between items-center mb-2">
+          <span class="text-sm font-medium text-slate-700">
+            ${escapeHTML(name)}
+          </span>
 
-            <div class="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
-              <div
-                class="h-full bg-emerald-500 rounded-full transition-all duration-500"
-                style="width:${Math.min(Math.max(percent, 0), 100)}%">
-              </div>
-            </div>
+          <div class="text-right">
+            <span class="font-semibold text-[#007934]">
+              ${value.toLocaleString('th-TH')} คน
+            </span>
+
+            <span class="text-xs text-slate-500 ml-2">
+              ${percent.toLocaleString('th-TH', {
+                maximumFractionDigits: 1
+              })}%
+            </span>
           </div>
-        `;
-      })
-      .join('');
-  }
+        </div>
+
+        <div class="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
+          <div
+            class="h-full bg-emerald-500 rounded-full transition-all duration-500"
+            style="width:${Math.min(percent, 100)}%">
+          </div>
+        </div>
+
+      </div>
+    `;
+  }).join('');
 
   updatedAt.textContent = data.updatedAt || '-';
 }
