@@ -577,26 +577,28 @@ function renderCentralStats(data) {
     companyBox.innerHTML =
       '<p class="text-sm text-slate-400">ยังไม่มีข้อมูลบริษัท</p>';
   } else {
-
     companyBox.innerHTML = entries
-  .map(([name, count]) => {
-    const value = Number(count || 0);
+      .map(([name, count]) => {
+        const value = Number(count || 0);
+        const percent = Number(percentages[name] || 0);
 
-    return `
-      <div class="py-3 border-b border-slate-100">
-        <div class="flex justify-between items-center mb-2">
-          <span class="text-sm font-medium text-slate-700">
-            ${escapeHTML(name)}
-          </span>
+        return `
+          <div class="py-3 border-b border-slate-100">
+            <div class="flex justify-between items-center mb-2">
+              <span class="text-sm font-medium text-slate-700">
+                ${escapeHTML(name)}
+              </span>
 
-          <span class="font-semibold text-[#007934]">
-            ${value.toLocaleString('th-TH')} คน
-          </span>
-        </div>
-      </div>
-    `;
-  })
-  .join('');
+              <div class="text-right">
+                <span class="font-semibold text-[#007934]">
+                  ${value.toLocaleString('th-TH')} คน
+                </span>
+                <span class="text-xs text-slate-500 ml-2">
+                  ${percent.toLocaleString('th-TH')}%
+                </span>
+              </div>
+            </div>
+
             <div class="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
               <div
                 class="h-full bg-emerald-500 rounded-full transition-all duration-500"
