@@ -280,14 +280,62 @@
     </form>
 
     <section id="dash" class="card p-5 mt-7 hidden">
-      <div class="flex flex-wrap justify-between items-center gap-2">
-        <h3 class="font-semibold text-[#007934]">ข้อมูลที่บันทึกในเครื่องนี้</h3>
-        <button onclick="hideDashboard()" class="text-sm font-medium text-[#007934] hover:underline">กลับไปแบบฟอร์ม</button>
+  <div class="flex flex-wrap justify-between items-center gap-3">
+    <div>
+      <h3 class="font-semibold text-[#007934]">
+        ข้อมูลแบบสำรวจจากฐานกลาง
+      </h3>
+      <p class="text-sm text-slate-500 mt-1">
+        ข้อมูลจาก Google Sheets
+      </p>
+    </div>
+
+    <div class="flex gap-2">
+      <button
+        onclick="refreshCentralData()"
+        class="rounded-xl border border-emerald-200 bg-white px-4 py-2 text-sm text-[#007934] hover:bg-emerald-50">
+        🔄 รีเฟรชข้อมูล
+      </button>
+
+      <button
+        onclick="hideDashboard()"
+        class="text-sm font-medium text-[#007934] hover:underline">
+        กลับไปแบบฟอร์ม
+      </button>
+    </div>
+  </div>
+
+  <div id="centralStatus"
+    class="mt-4 text-sm text-slate-500">
+    กำลังโหลดข้อมูล...
+  </div>
+
+  <div class="grid md:grid-cols-2 gap-4 mt-4">
+    <div class="rounded-xl border border-emerald-100 bg-emerald-50 p-5">
+      <p class="text-sm text-slate-500">จำนวนผู้ตอบแบบสำรวจทั้งหมด</p>
+      <div id="centralTotal"
+        class="text-3xl font-bold text-[#007934] mt-2">
+      -
       </div>
-      <p class="text-sm text-slate-500 mt-2" id="recordCount"></p>
-      <div id="records" class="space-y-3 mt-4"></div>
-      <button onclick="clearRecords()" class="mt-4 text-sm text-rose-600 hover:underline">ลบข้อมูลทดลองที่บันทึกไว้</button>
-    </section>
+      <p class="text-xs text-slate-500 mt-1">Responses</p>
+    </div>
+
+    <div class="rounded-xl border border-slate-200 bg-white p-5">
+      <p class="text-sm font-medium text-slate-700">
+        จำนวนผู้ตอบแยกตามบริษัท
+      </p>
+      <div id="centralCompanyCounts" class="space-y-2 mt-3">
+        <p class="text-sm text-slate-400">กำลังโหลด...</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-4 text-xs text-slate-400">
+    <span>อัปเดตล่าสุดจากฐานกลาง:</span>
+    <span id="centralUpdatedAt">-</span>
+  </div>
+
+</section>
 
     <div id="toast"
       class="fixed bottom-5 left-1/2 -translate-x-1/2 bg-[#052e16] border border-[#54a832] text-white px-5 py-3 rounded-xl shadow-lg hidden">
@@ -425,21 +473,148 @@
       }
     });
 
-    function showDashboard() {
-      document.getElementById('dash').classList.remove('hidden');
-      document.getElementById('dash').scrollIntoView({ behavior: 'smooth' });
-      let d = getRecords();
-      document.getElementById('recordCount').textContent = `มีข้อมูลสำรองใน Browser นี้ ${d.length} รายการ (ยังไม่ใช่ข้อมูลจากฐานกลาง)`;
-      document.getElementById('records').innerHTML = d.map((r, i) => `<div class="border border-emerald-100 bg-emerald-50/20 rounded-xl p-3"><div class="flex justify-between gap-3"><strong class="text-[#007934]">รายการ ${i + 1}: ${r.name || 'ไม่ระบุชื่อ'}</strong><span class="text-xs text-slate-500">${new Date(r.submittedAt).toLocaleString('th-TH')}</span></div><div class="text-sm mt-1">${r.company || "ยังไม่ระบุบริษัท"} · ${r.department} · ${r.level}</div><div class="text-sm mt-2"><b>IDP:</b> ${r.idp.join(' / ')}</div></div>`).join('') || '<p class="text-slate-500">ยังไม่มีข้อมูล</p>';
-    }
-    function hideDashboard() { document.getElementById('dash').classList.add('hidden'); }
-    function clearRecords() {
-      if (confirm('ลบข้อมูลที่เก็บไว้ใน Browser นี้ทั้งหมด?')) {
-        localStorage.removeItem(KEY);
-        showDashboard();
-        showToast('ลบข้อมูลทดลองแล้ว');
+    // ==========================================
+// CENTRAL GOOGLE SHEETS DASHBOARD
+// ==========================================
+
+const CENTRAL_API_URL =
+  'https://script.google.com/macros/s/AKfycbxbjhfOXuucIXBOfXgI4cY5XuVNYiEzaD0M4LbtBOeerhYBHhyFrPcEWNqMzhsxod00/exec';
+
+function showDashboard() {
+  document.getElementById('dash').classList.remove('hidden');
+  document.getElementById('dash').scrollIntoView({
+    behavior: 'smooth'
+  });
+
+  refreshCentralData();
+}
+
+function refreshCentralData() {
+  const status = document.getElementById('centralStatus');
+  const total = document.getElementById('centralTotal');
+  const companyBox = document.getElementById('centralCompanyCounts');
+  const updatedAt = document.getElementById('centralUpdatedAt');
+
+  status.textContent = 'กำลังโหลดข้อมูลจาก Google Sheets...';
+  total.textContent = '-';
+  companyBox.innerHTML =
+    '<p class="text-sm text-slate-400">กำลังโหลด...</p>';
+  updatedAt.textContent = '-';
+
+  const callbackName = 'altTnaStatsCallback';
+
+  // ล้าง callback เก่าก่อนเรียกใหม่
+  window[callbackName] = function(data) {
+    try {
+      if (!data || data.success !== true) {
+        throw new Error(data?.message || 'ไม่สามารถโหลดข้อมูลได้');
+      }
+
+      renderCentralStats(data);
+
+    } catch (err) {
+      showCentralError(err.message);
+    } finally {
+      delete window[callbackName];
+      if (script && script.parentNode) {
+        script.parentNode.removeChild(script);
       }
     }
+  };
+
+  const script = document.createElement('script');
+
+  script.src =
+    CENTRAL_API_URL +
+    '?action=stats&callback=' +
+    callbackName +
+    '&_=' + Date.now();
+
+  script.onerror = function() {
+    delete window[callbackName];
+
+    if (script.parentNode) {
+      script.parentNode.removeChild(script);
+    }
+
+    showCentralError('เชื่อมต่อฐานกลางไม่สำเร็จ กรุณาลองรีเฟรช');
+  };
+
+  script.onload = function() {
+    // หาก callback ไม่ถูกเรียก แสดง error
+    setTimeout(function() {
+      if (typeof window[callbackName] === 'function') {
+        delete window[callbackName];
+        if (script.parentNode) {
+          script.parentNode.removeChild(script);
+        }
+        showCentralError('ไม่ได้รับข้อมูลจากฐานกลาง');
+      }
+    }, 10000);
+  };
+
+  document.body.appendChild(script);
+}
+
+function renderCentralStats(data) {
+  const status = document.getElementById('centralStatus');
+  const total = document.getElementById('centralTotal');
+  const companyBox = document.getElementById('centralCompanyCounts');
+  const updatedAt = document.getElementById('centralUpdatedAt');
+
+  total.textContent = Number(data.totalResponses || 0).toLocaleString('th-TH');
+
+  status.textContent = 'เชื่อมต่อฐานกลางสำเร็จ ✓';
+  status.className = 'mt-4 text-sm text-emerald-700';
+
+  const companies = data.companyCounts || {};
+  const entries = Object.entries(companies);
+
+  if (entries.length === 0) {
+    companyBox.innerHTML =
+      '<p class="text-sm text-slate-400">ยังไม่มีข้อมูลบริษัท</p>';
+  } else {
+    companyBox.innerHTML = entries
+      .sort((a, b) => b[1] - a[1])
+      .map(([name, count]) => `
+        <div class="flex justify-between items-center border-b border-slate-100 pb-2">
+          <span class="text-sm text-slate-700">${escapeHTML(name)}</span>
+          <span class="font-semibold text-[#007934]">
+            ${Number(count).toLocaleString('th-TH')} คน
+          </span>
+        </div>
+      `)
+      .join('');
+  }
+
+  updatedAt.textContent = data.updatedAt || '-';
+}
+
+function showCentralError(message) {
+  document.getElementById('centralStatus').textContent = message;
+  document.getElementById('centralStatus').className =
+    'mt-4 text-sm text-rose-600';
+
+  document.getElementById('centralTotal').textContent = '-';
+
+  document.getElementById('centralCompanyCounts').innerHTML =
+    '<p class="text-sm text-rose-500">ไม่สามารถโหลดข้อมูลได้</p>';
+
+  document.getElementById('centralUpdatedAt').textContent = '-';
+}
+
+function escapeHTML(value) {
+  return String(value ?? '')
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#39;');
+}
+
+function hideDashboard() {
+  document.getElementById('dash').classList.add('hidden');
+}
 
     function exportCSV() {
       let data = getRecords();
