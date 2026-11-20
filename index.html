@@ -579,10 +579,7 @@ function renderCentralStats(data) {
   companyBox.innerHTML = companyList.map(name => {
     const value = Number(companies[name] || 0);
 
-    // คำนวณเปอร์เซ็นต์จากจำนวนผู้ตอบทั้งหมด
-    const percent = totalResponses > 0
-      ? (value / totalResponses) * 100
-      : 0;
+
 
     return `
       <div class="py-3 border-b border-slate-100">
